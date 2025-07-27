@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const BING_API_KEY = process.env.BING_API_KEY;
-const BING_SEARCH_URL = "https://api.bing.microsoft.com/v7.0/search";
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+const GOOGLE_CX = process.env.GOOGLE_CX;
+const GOOGLE_SEARCH_URL = "https://www.googleapis.com/customsearch/v1";
 
 export const runtime = "edge";
 
@@ -18,24 +19,21 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  if (!BING_API_KEY) {
+  if (!GOOGLE_API_KEY || !GOOGLE_CX) {
     console.error(
-      "Bing API key is undefined. Please check your .env.local file."
+      "Google API key or CX is undefined. Please check your .env.local file."
     );
     return new NextResponse(
-      JSON.stringify({ message: "Bing API key is not configured." }),
+      JSON.stringify({ message: "Google Search API is not configured." }),
       { status: 500 }
     );
   }
 
   try {
     const response = await fetch(
-      `${BING_SEARCH_URL}?q=${encodeURIComponent(q)}`,
+      `${GOOGLE_SEARCH_URL}?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&q=${encodeURIComponent(q)}`,
       {
         method: "GET",
-        headers: new Headers({
-          "Ocp-Apim-Subscription-Key": BING_API_KEY,
-        }),
       }
     );
 
@@ -44,9 +42,24 @@ export async function GET(req: NextRequest) {
     }
 
     const data = await response.json();
-    return NextResponse.json({ message: "Success", data });
+    
+    // Transform Google response to match Bing format
+    const transformedData = {
+      data: {
+        webPages: {
+          value: data.items?.map((item: any) => ({
+            name: item.title,
+            url: item.link,
+            snippet: item.snippet,
+            displayUrl: item.displayLink,
+          })) || []
+        }
+      }
+    };
+
+    return NextResponse.json({ message: "Success", data: transformedData.data });
   } catch (error) {
-    console.error("Bing API request error:", error);
+    console.error("Google Search API request error:", error);
     return new NextResponse(
       JSON.stringify({ message: "Internal Server Error" }),
       { status: 500 }

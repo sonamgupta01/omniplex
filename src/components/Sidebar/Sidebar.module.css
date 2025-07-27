@@ -368,3 +368,43 @@
     opacity: 0;
   }
 }
+
+.pricingSection {
+  margin: 8px 0;
+  padding: 0;
+}
+
+.pricingButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 8px auto;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  border: 1px solid #ffffff14;
+}
+
+.pricingButton:hover {
+  background-color: #ffffff14;
+}
+
+.pricingContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pricingIcon {
+  font-size: 20px;
+  color: #fbbf24;
+}
+
+.pricingText {
+  display: none;
+}

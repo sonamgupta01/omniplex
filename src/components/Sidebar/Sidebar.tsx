@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { selectAuthState } from "@/store/authSlice";
 import { useDisclosure } from "@nextui-org/modal";
+import Link from 'next/link';
 
 import Logo from "../../../public/Logo.svg";
 import Menu from "../../../public/svgs/Menu.svg";
@@ -194,6 +195,18 @@ const Sidebar = () => {
                       onClick={() => setSelected("plugins")}
                     />
                   )}
+                </div>
+                <div className={styles.pricingSection}>
+                  <Link 
+                    href="/pricing"
+                    className={styles.pricingButton}
+                    onClick={closeSidebar}
+                  >
+                    <div className={styles.pricingContent}>
+                      <span className={styles.pricingIcon}>⭐</span>
+                      <span className={styles.pricingText}>Upgrade to Pro</span>
+                    </div>
+                  </Link>
                 </div>
                 <div>
                   <Image
