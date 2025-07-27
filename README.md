@@ -3,183 +3,234 @@
 <p align="center">
 	<h1 align="center"><b>Omniplex</b></h1>
 <p align="center">
-    Open-Source Perplexity
+    Open-Source Perplexity-like AI Search & Chat Platform
     <br />
     <br />
-    <a href="https://omniplex.ai">Website</a>
+    <a href="https://agreeable-bay-0e0d63510.azurestaticapps.net">🚀 Live Demo</a>
     ·
-    <a href="https://discord.gg/87Mh7q5ZSd">Discord</a>
+    <a href="https://github.com/sonamgupta01/omniplex">GitHub Repository</a>
     ·
-    <a href="https://www.reddit.com/r/omniplex_ai">Reddit</a>
+    <a href="https://agreeable-bay-0e0d63510.azurestaticapps.net/pricing">💳 Pricing</a>
   </p>
 </p>
 
-# :construction: Under Active Development
+# 🚀 **Deployed & Production Ready**
 
-> Our focus is on establishing core functionality and essential features. As we continue to develop Omniplex, we are committed to implementing best practices, refining the codebase, and introducing new features to enhance the user experience.
+> **Live Application**: [https://agreeable-bay-0e0d63510.azurestaticapps.net](https://agreeable-bay-0e0d63510.azurestaticapps.net)
 
-## Get started
+This is a fully functional, production-ready deployment with all features working including Stripe payments, AI chat, web search, and plugin integrations.
 
-To run the project, modify the code in the Chat component to use the `// Development Code`.
+## 🌟 **Features**
 
-1. Fork & Clone the repository
+- ✅ **AI Chat**: Google Gemini API integration for intelligent conversations
+- ✅ **Web Search**: Google Custom Search API for real-time web results
+- ✅ **Weather Plugin**: OpenWeatherMap integration for weather data
+- ✅ **Stock Plugin**: Finnhub & Alpha Vantage APIs for market data
+- ✅ **Dictionary Plugin**: Word definitions and meanings
+- ✅ **File Upload**: Image processing and analysis
+- ✅ **Stripe Payments**: Subscription management (test mode)
+- ✅ **Firebase Integration**: Authentication, storage, and database
+- ✅ **Responsive Design**: Mobile-friendly interface
+- ✅ **Chat History**: Persistent conversation storage
+- ✅ **Share & Fork**: Share conversations with others
 
+## 🚀 **Quick Start**
+
+### **Option 1: Use Live Demo**
+Visit the deployed application: **[https://agreeable-bay-0e0d63510.azurestaticapps.net](https://agreeable-bay-0e0d63510.azurestaticapps.net)**
+
+### **Option 2: Run Locally**
+
+1. **Clone the repository**
 ```bash
-git clone git@github.com:[YOUR_GITHUB_ACCOUNT]/omniplex.git
+git clone https://github.com/sonamgupta01/omniplex.git
+cd omniplex
 ```
 
-2. Install the dependencies
-
+2. **Install dependencies**
 ```bash
-yarn
+npm install
+# or
+yarn install
 ```
 
-3. Fill out secrets in `.env.local`
-
+3. **Set up environment variables**
+Create a `.env.local` file in the root directory:
 ```bash
-BING_API_KEY=
-OPENAI_API_KEY=
+# Google APIs
+GOOGLE_API_KEY=your_google_api_key
+GOOGLE_CX=your_custom_search_engine_id
 
-OPENWEATHERMAP_API_KEY=
-ALPHA_VANTAGE_API_KEY=
-FINNHUB_API_KEY=
+# OpenAI API (optional)
+OPENAI_API_KEY=your_openai_api_key
+
+# Stripe (for payments)
+STRIPE_SECRET_KEY=your_stripe_secret_key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+
+# Application URL
+NEXT_PUBLIC_URL=http://localhost:3000
+
+# Plugin APIs
+OPENWEATHERMAP_API_KEY=your_weather_api_key
+ALPHA_VANTAGE_API_KEY=your_alpha_vantage_key
+FINNHUB_API_KEY=your_finnhub_api_key
 ```
 
-4. Run the development server
-
+4. **Run the development server**
 ```bash
+npm run dev
+# or
 yarn dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+5. **Open your browser**
+Navigate to [http://localhost:3000](http://localhost:3000) to see the app.
 
-## Plugins Development
+## 🔧 **API Keys Setup**
 
-> This is just a hacky way but very easy to implement. We will be adding a more robust way to add plugins in the future. Feel free to understand from the sample plugin we have added.
+### **Required APIs:**
+1. **Google API Key**: [Google Cloud Console](https://console.cloud.google.com/)
+   - Enable Custom Search API
+   - Create a Custom Search Engine at [cse.google.com](https://cse.google.com/)
 
-1. Update the types in `types.ts` to include the new plugin data types.
-2. Update the `tools` api in `api` to include the new plugin function call.
-3. Update the `api.ts` in `utils` file to include the new plugin data.
-4. Update the `chatSlice.ts` in `store` to include the new plugin reducer.
-5. Create a new folder in the `components` directory for the UI of the plugin.
-6. Update the `chat.tsx` to handle the new plugin in `useEffect`.
-7. Call the plugin function and return the data as props to source.
-8. Update the `source.ts` to use the plugin UI.
-9. Lastly Update the `data.ts` in `utils` to show in the plugin tab.
+2. **Stripe Account**: [Stripe Dashboard](https://dashboard.stripe.com/)
+   - Get your test API keys for development
 
-## Multi-LLM Support: Example
+3. **Weather API**: [OpenWeatherMap](https://openweathermap.org/api)
+   - Free tier available
 
-1. Add the new LLM apiKey in env and add the related npm package.
+4. **Stock APIs**:
+   - [Alpha Vantage](https://www.alphavantage.co/support/#api-key)
+   - [Finnhub](https://finnhub.io/register)
 
+## 🧪 **Testing Stripe Payments**
+
+Use these test card numbers in the deployed app:
+- **Success**: `4242 4242 4242 4242`
+- **Decline**: `4000 0000 0000 0002`
+- **Any future expiry date and CVC**
+
+## 🔌 **Plugin Development**
+
+The app supports a modular plugin system. To add new plugins:
+
+1. Update types in `src/utils/types.ts`
+2. Add API route in `src/app/api/[plugin-name]/route.ts`
+3. Create UI component in `src/components/[PluginName]/`
+4. Update `src/components/Source/Source.tsx` to handle the plugin
+5. Add plugin data to `src/utils/data.ts`
+
+## 🏗️ **Deployment**
+
+### **Azure Static Web Apps**
+This project is deployed on Azure Static Web Apps with automatic CI/CD:
+
+- **Live URL**: [https://agreeable-bay-0e0d63510.azurestaticapps.net](https://agreeable-bay-0e0d63510.azurestaticapps.net)
+- **Auto-deployment**: Pushes to `main` branch trigger automatic builds
+- **Environment Variables**: Configured in Azure portal
+
+### **Build Process**
 ```bash
-ANTHROPIC_API_KEY=******
+npm run build    # Creates optimized production build
+npm run start    # Runs production server locally
 ```
 
-2. Update the `chat` in `api`
+## 🔄 **Multi-LLM Support**
 
-```ts
-import Anthropic from "@anthropic-ai/sdk";
-import { OpenAIStream, StreamingTextResponse } from "ai";
+Currently using **Google Gemini API**. To add other LLMs:
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
-
-export const runtime = "edge";
-
-export async function POST(req: Request) {
-  const {
-    messages,
-    model,
-    temperature,
-    max_tokens,
-    top_p,
-    frequency_penalty,
-    presence_penalty,
-  } = await req.json();
-
-  const response = await anthropic.messages.create({
-    stream: true,
-    model: model,
-    temperature: temperature,
-    max_tokens: max_tokens,
-    top_p: top_p,
-    frequency_penalty: frequency_penalty,
-    presence_penalty: presence_penalty,
-    messages: messages,
-  });
-
-  const stream = OpenAIStream(response);
-  return new StreamingTextResponse(stream);
-}
+1. **Add API key to environment**:
+```bash
+ANTHROPIC_API_KEY=your_anthropic_key
 ```
 
-3. Update the `data` in `utils`
+2. **Update chat API route** (`src/app/api/chat/route.ts`)
+3. **Add model options** in `src/utils/data.ts`
 
-```ts
-export const MODELS = [
-  { label: "Claude 3 Haiku", value: "claude-3-haiku-20240307" },
-  { label: "Claude 3 Sonnet", value: "claude-3-sonnet-20240229" },
-  { label: "Claude 3 Opus", value: "claude-3-opus-20240229" },
-];
-```
+### **Supported Models**:
+- ✅ **Google Gemini 1.5 Flash** (Current)
+- 🔄 **OpenAI GPT** (Ready to integrate)
+- 🔄 **Anthropic Claude** (Ready to integrate)
 
-## Disclaimer
+## ✅ **Project Status**
 
-> We recently transitioned from the pages directory to the app directory, which involved significant changes to the project structure and architecture. As a result, you may encounter some inconsistencies or rough edges in the codebase.
+### **Completed Features**
+- [x] **AI Chat Integration** - Google Gemini API
+- [x] **Web Search** - Google Custom Search API
+- [x] **Payment System** - Stripe integration (test mode)
+- [x] **Plugin System** - Weather, Stock, Dictionary
+- [x] **File Upload** - Image processing
+- [x] **Authentication** - Firebase Auth
+- [x] **Database** - Firebase Firestore
+- [x] **Chat History** - Persistent storage
+- [x] **Responsive Design** - Mobile-friendly
+- [x] **Production Deployment** - Azure Static Web Apps
+- [x] **CI/CD Pipeline** - Automatic deployments
 
-### Roadmap
+### **Roadmap**
+- [ ] **Multi-LLM Support** - OpenAI, Anthropic integration
+- [ ] **Advanced Plugins** - More data sources
+- [ ] **User Dashboard** - Analytics and usage stats
+- [ ] **API Rate Limiting** - Usage controls
+- [ ] **Advanced Search** - Filters and sorting
 
-- [x] Images & Videos for Search
-- [x] Upload for Vision Model
-- [x] Chat History for Users
-- [x] Shared Chats & Fork
-- [x] Settings for LLMs
-- [x] Custom OG Metadata
-- [x] Faster API Requests
-- [x] Allow Multiple LLMs
-- [x] Plugin Development
-- [x] Function Calling with Gen UI
+## 🏗️ **Tech Stack**
 
-### App Architecture
+### **Frontend**
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **UI Library**: React 18
+- **State Management**: Redux Toolkit + Redux Persist
+- **Styling**: TailwindCSS + NextUI + Tremor
+- **Icons**: Heroicons + Remix Icons
 
-- Language: TypeScript
-- Frontend Framework: React
-- State Management: Redux
-- Web Framework: Next.js
-- Backend and Database: Firebase
-- UI Library: NextUI & Tremor
-- CSS Framework: TailwindCSS
-- AI SDK: Vercel AI SDK
+### **Backend & APIs**
+- **Runtime**: Next.js API Routes (Edge Runtime)
+- **AI**: Google Gemini API
+- **Search**: Google Custom Search API
+- **Payment**: Stripe API
+- **Weather**: OpenWeatherMap API
+- **Stocks**: Alpha Vantage + Finnhub APIs
+- **Dictionary**: Free Dictionary API
 
-### Services
+### **Infrastructure**
+- **Hosting**: Azure Static Web Apps
+- **Database**: Firebase Firestore
+- **Authentication**: Firebase Auth
+- **Storage**: Firebase Storage
+- **CI/CD**: GitHub Actions + Azure
+- **Analytics**: Vercel Analytics
 
-- LLM: OpenAI
-- Search API: Bing
-- Weather API: OpenWeatherMap
-- Stocks API: Alpha Vantage & Finnhub
-- Dictionary API: WordnikFree Dictionary API
-- Hosting & Analytics: Vercel
-- Authentication, Storage & Database: Firebase
+## 🔗 **Links**
 
-## Contributing
+- **🚀 Live Demo**: [https://agreeable-bay-0e0d63510.azurestaticapps.net](https://agreeable-bay-0e0d63510.azurestaticapps.net)
+- **💳 Pricing Page**: [https://agreeable-bay-0e0d63510.azurestaticapps.net/pricing](https://agreeable-bay-0e0d63510.azurestaticapps.net/pricing)
+- **📱 Weather Plugin**: [https://agreeable-bay-0e0d63510.azurestaticapps.net/plugins/weather](https://agreeable-bay-0e0d63510.azurestaticapps.net/plugins/weather)
+- **📈 Stock Plugin**: [https://agreeable-bay-0e0d63510.azurestaticapps.net/plugins/stocks](https://agreeable-bay-0e0d63510.azurestaticapps.net/plugins/stocks)
+- **📚 Dictionary Plugin**: [https://agreeable-bay-0e0d63510.azurestaticapps.net/plugins/dictionary](https://agreeable-bay-0e0d63510.azurestaticapps.net/plugins/dictionary)
 
-We welcome contributions from the community! If you'd like to contribute to Openpanel, please follow these steps:
+## 🤝 **Contributing**
 
-1. Fork the repository
-2. Create a new branch for your feature or bug fix
-3. Make your changes and commit them with descriptive messages
-4. Push your changes to your forked repository
-5. Submit a pull request to the main repository
+We welcome contributions! To contribute:
 
-Please ensure that your code follows our coding conventions and passes all tests before submitting a pull request.
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
+3. **Commit** your changes: `git commit -m 'Add amazing feature'`
+4. **Push** to the branch: `git push origin feature/amazing-feature`
+5. **Open** a Pull Request
 
-## License
+## 📄 **License**
 
 This project is licensed under the [AGPL-3.0 license](LICENSE).
 
-## Contact
+## 📞 **Contact & Support**
 
-If you have any questions or suggestions, feel free to reach out to us at [Contact](https://bishalsaha.com/contact).
+- **GitHub Issues**: [Report bugs or request features](https://github.com/sonamgupta01/omniplex/issues)
+- **Live Demo**: [Try the application](https://agreeable-bay-0e0d63510.azurestaticapps.net)
 
-Happy coding! 🚀
+---
+
+**⭐ Star this repository if you found it helpful!**
+
+Made with ❤️ using Next.js, React, and TypeScript
