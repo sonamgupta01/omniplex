@@ -1,6 +1,7 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 // Firebase Config
 export const firebaseConfig = {
@@ -13,12 +14,34 @@ export const firebaseConfig = {
   measurementId: "G-S42TJDYNL5"
 };
 
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase only if config is available and not during build
+let app;
+let db;
+let storage;
+let auth;
 
-const db = getFirestore(app);
-const storage = getStorage(app);
+try {
+  if (firebaseConfig.apiKey && firebaseConfig.projectId && typeof window !== 'undefined') {
+    app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+    db = getFirestore(app);
+    storage = getStorage(app);
+    auth = getAuth(app);
+  } else {
+    console.warn('Firebase config missing or running in build mode');
+    app = null;
+    db = null;
+    storage = null;
+    auth = null;
+  }
+} catch (error) {
+  console.warn('Firebase initialization failed:', error);
+  app = null;
+  db = null;
+  storage = null;
+  auth = null;
+}
 
-export { db, storage };
+export { db, storage, auth };
 
 export const initializeFirebase = () => {
   return app;
